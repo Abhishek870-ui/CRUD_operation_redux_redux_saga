@@ -1,0 +1,4 @@
+insert server port in package.json file.
+//    "server": "json-server --watch db.json --port 5000"
+ now run the server
+ // npm run server

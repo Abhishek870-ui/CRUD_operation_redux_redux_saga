@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "abc",
+      "email": "abc@yopmail.com",
+      "phone": 7896541230,
+      "address": "abc"
+    },
+    {
+      "type": "CREATE_USER_START",
+      "payload": {
+        "name": "abc",
+        "email": "abc@gmail.com",
+        "phone": "7896541230",
+        "address": "abc",
+        "id": 2
+      }
+    },
+    {
+      "type": "CREATE_USER_START",
+      "payload": {
+        "name": "asd",
+        "email": "asd@gmail.com",
+        "phone": "7896541230",
+        "address": "asd"
+      },
+      "id": 3
+    },
+    {
+      "type": "CREATE_USER_START",
+      "payload": {
+        "name": "Abhishek Garg",
+        "email": "Abhishekgarg959@gmail.com",
+        "phone": "8708292063",
+        "address": "Kaithal, Haryana, 136043"
+      },
+      "id": 4
+    },
+    {
+      "type": "CREATE_USER_START",
+      "payload": {
+        "name": "Abhishek Garg",
+        "email": "Abhishekgarg959@gmail.com",
+        "phone": "8708292063",
+        "address": "Kaithal, Haryana, 136043"
+      },
+      "id": 5
+    },
+    {
+      "type": "CREATE_USER_START",
+      "id": 6
+    }
+  ]
+}

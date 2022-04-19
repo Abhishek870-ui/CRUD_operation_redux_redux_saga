@@ -1,0 +1,91 @@
+import { MDBBtn, MDBIcon, MDBSpinner, MDBTable, MDBTableBody, MDBTableHead, MDBTooltip } from 'mdb-react-ui-kit';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { deleteUserStart, loadUserStart } from '../redux/action';
+
+const Home = () => {
+
+  const dispatch = useDispatch();
+  const { users,loading, error } = useSelector(state => state.data)
+
+  useEffect(() => {
+    dispatch(loadUserStart())
+  }, [])
+
+  useEffect(() => {error && toast.error(error)},[error])
+
+  if(loading) {
+    return (
+      <MDBSpinner style={{marginTop : "150px", }} role= "status">
+        <span className='visually-hidden'>Loading...</span>
+      </MDBSpinner>
+    )
+  }
+
+  const handleDelete = (id) => { 
+    if(window.confirm("Are you sure that you wanted to delte that user?"))
+    {
+      dispatch(deleteUserStart(id))
+      toast.success("User Deleted Successfully")
+    }
+  }
+  {console.log(users[2],"users")}
+
+  return (
+    <>
+      <div className='container' style={{ marginTop: "150px" }}>
+        <MDBTable>
+          <MDBTableHead dark>
+            <tr>
+              <th scope='col'>No.</th>
+              <th scope='col'>Name</th>
+              <th scope='col'>Email</th>
+              <th scope='col'>Phone</th>
+              <th scope='col'>Address</th>
+              <th scope='col'>Action</th>
+
+            </tr>
+          </MDBTableHead>
+          {users && users.map((item, index) => (
+            <MDBTableBody key={index}>
+              <tr>
+                <td scope="row">{index + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.phone}</td>
+                <td>{item.address}</td>
+                <td>
+                  <MDBBtn className='m-1' tag='a' color='none' onClick={() => handleDelete(item.id)}>
+                    <MDBTooltip title="Delete" tag="a">
+                      <MDBIcon fas icon="trash" style={{ color: "#dd4b39" }}
+                        size="lg"></MDBIcon>
+                    </MDBTooltip>
+                  </MDBBtn>{""}{""}
+                  <Link to={`/editUser/${item.id}`}>
+                    <MDBTooltip title="Edit" tag="a">
+                      <MDBIcon fas icon="pen" style={{ color: "#SSacee", marginBottom: "10px" }}
+                        size="lg"></MDBIcon>
+                    </MDBTooltip>
+                  </Link>
+                  <Link to={`/userInfo/${item.id}`}>
+                    <MDBTooltip title="View" tag="a">
+                      <MDBIcon fas icon="eye" style={{ color: "#3b5998", marginBottom: "10px" }}
+                        size="lg"></MDBIcon>
+                    </MDBTooltip>
+                  </Link>
+                </td>
+
+
+              </tr>
+            </MDBTableBody>
+          ))}
+        </MDBTable>
+
+      </div>
+    </>
+  )
+}
+
+export default Home
